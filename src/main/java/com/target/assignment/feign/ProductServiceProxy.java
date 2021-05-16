@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Optional;
+
 @FeignClient(name = "product-service",url="https://redsky.target.com/v3/pdp/tcin/" )
 public interface ProductServiceProxy {
 
@@ -14,5 +16,5 @@ public interface ProductServiceProxy {
      * @return
      */
     @GetMapping(value = "/{productId}?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics&key=candidate")
-    public ResponseEntity<String> getProductInfoById(@PathVariable("productId") String productId);
+    public Optional<ResponseEntity<String>> getProductInfoById(@PathVariable("productId") String productId);
 }
